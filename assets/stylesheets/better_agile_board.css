@@ -1,0 +1,8 @@
+.scrollable-content {
+    max-height: 300px; /* Ограничиваем высоту для прокрутки */
+    overflow-y: auto;  /* Включаем вертикальную прокрутку */
+}
+
+table.list td.issue-status-col {
+    padding: 0px !important;
+}

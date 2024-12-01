@@ -1,0 +1,6 @@
+<tr>
+  <td colspan="2">
+    <input type="checkbox" id="toggleScroll" <%= User.current.pref[:toggle_scroll] ? 'checked' : '' %> />
+    <label for="toggleScroll"><%= l(:toggle_columns_scroll) %></label>
+  </td>
+</tr>
