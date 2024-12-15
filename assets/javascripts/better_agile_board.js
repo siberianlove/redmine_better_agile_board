@@ -105,13 +105,13 @@ function disableScroll() {
 }
 
 function enableCompact() {
-    const elements = document.querySelectorAll('#content, #main, .issue-card, .attributes, .buttons');
+    const elements = document.querySelectorAll('#content, #main, .issue-card, .buttons');
     elements.forEach(el => {
         el.classList.add('compact'); // Гарантированно добавляем класс
     });
 }
 function disableCompact() {
-    const elements = document.querySelectorAll('#content, #main, .issue-card, .attributes, .buttons');
+    const elements = document.querySelectorAll('#content, #main, .issue-card, .buttons');
     elements.forEach(el => {
         el.classList.remove('compact'); // Гарантированно добавляем класс
     });

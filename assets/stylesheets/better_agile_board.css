@@ -7,29 +7,27 @@ table.list td.issue-status-col {
     padding: 0 !important;
 }
 
-@media (max-width: 1024px) {
-    #content.compact {
-        padding-right: 0 !important;
-        padding-left: 0 !important;
-        margin-right: 0 !important;
-    }
+.attributes {
+    margin-top: 5px;
+}
 
-    #main.compact {
-        margin-right: 0;
-        margin-left: 0;
-    }
+#content.compact {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+}
 
-    .issue-card.compact {
-        margin: 1px;
-        padding: 3px;
-    }
+#main.compact {
+    margin-right: 0;
+    margin-left: 0;
+}
 
-    .attributes.compact {
-        margin-top: 5px;
-    }
+.issue-card.compact {
+    margin: 1px;
+    padding: 3px;
+}
 
-    .buttons.compact {
-        margin-top: 1px;
-        margin-bottom: 1px;
-    }
+.buttons.compact {
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
