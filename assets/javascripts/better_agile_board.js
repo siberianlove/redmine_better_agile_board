@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const toggleCheckbox = document.getElementById('toggleScroll');
-    if (toggleCheckbox) {
-        generateUserFilterButtons()
-        toggleCheckbox.addEventListener('change', function (event) {
+    const toggleScroll = document.getElementById('toggleScroll');
+    if (toggleScroll) {
+        toggleScroll.addEventListener('change', function (event) {
             if (event.target.checked) {
                 enableScroll()
             } else {
@@ -28,24 +27,56 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('There was a problem with the fetch operation:', error);
                 });
         });
-        // Запрос текущих настроек пользователя
-        fetch('/better_agile_board/load_user_setting', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'same-origin',
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.toggleScroll) {
-                    toggleCheckbox.checked = true;
-                    enableScroll(); // Активируйте прокрутку, если настройка включена
-                }
-            })
-            .catch(error => console.error('Error fetching user setting:', error));
-
     }
+    const toggleCompact = document.getElementById('toggleCompact');
+    if (toggleCompact) {
+        toggleCompact.addEventListener('change', function (event) {
+            if (event.target.checked) {
+                enableCompact()
+            } else {
+                disableCompact()
+            }
+            // Сохранение настройки пользователя через AJAX
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Получаем токен из meta
+            fetch('/better_agile_board/save_user_setting', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': csrfToken // Добавляем CSRF-токен
+                },
+                body: JSON.stringify({toggleCompact: event.target.checked})
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    console.log('Setting saved');
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        });
+    }
+    // Запрос текущих настроек пользователя
+    fetch('/better_agile_board/load_user_setting', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.toggleScroll) {
+                toggleScroll.checked = true;
+                enableScroll();
+            }
+            if (data.toggleCompact) {
+                toggleCompact.checked = true;
+                enableCompact();
+            }
+        })
+        .catch(error => console.error('Error fetching user setting:', error));
 });
 
 function enableScroll() {
@@ -70,6 +101,19 @@ function disableScroll() {
             }
             column.removeChild(contentWrapper);
         }
+    });
+}
+
+function enableCompact() {
+    const elements = document.querySelectorAll('#content, #main, .issue-card, .attributes, .buttons');
+    elements.forEach(el => {
+        el.classList.add('compact'); // Гарантированно добавляем класс
+    });
+}
+function disableCompact() {
+    const elements = document.querySelectorAll('#content, #main, .issue-card, .attributes, .buttons');
+    elements.forEach(el => {
+        el.classList.remove('compact'); // Гарантированно добавляем класс
     });
 }
 

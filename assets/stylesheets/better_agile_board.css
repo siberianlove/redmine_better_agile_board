@@ -1,8 +1,35 @@
 .scrollable-content {
     max-height: 300px; /* Ограничиваем высоту для прокрутки */
-    overflow-y: auto;  /* Включаем вертикальную прокрутку */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
 }
 
 table.list td.issue-status-col {
-    padding: 0px !important;
+    padding: 0 !important;
+}
+
+@media (max-width: 1024px) {
+    #content.compact {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    #main.compact {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .issue-card.compact {
+        margin: 1px;
+        padding: 3px;
+    }
+
+    .attributes.compact {
+        margin-top: 5px;
+    }
+
+    .buttons.compact {
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
 }
